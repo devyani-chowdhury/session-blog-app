@@ -1,35 +1,57 @@
-import React, { useState, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useParams, Navigate } from 'react-router-dom';
-import Home from './components/Home';
-import BlogList from './components/BlogList';
-import BlogDetails from './components/BlogDetails';
-import NotFound from './components/NotFound';
+import React, { useState, createContext } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import './App.css';
+import Home from './components/Home';
+import About from './components/About';
+import CreateBlog from './components/CreateBlog';
+import CreateAccount from './components/CreateAccount';
+// import Contact from './components/Contact';
+import BlogList from './components/BlogList';
+import NotFound from './components/NotFound';
+import { BlogContext, BlogProvider } from './store/BlogContext';
 
-const ThemeContext = createContext();
+// Theme Context
+export const ThemeContext = createContext();
 
 function App() {
+  const [blogItems, setBlogItems] = useState([]);
+  const [dialogBlog, setDialogBlog] = useState(null);
   const [theme, setTheme] = useState("light");
 
+  const blogCTX = {
+    blogs: blogItems,
+    setBlogs: setBlogItems,
+    dialogBlog: dialogBlog,
+    setDialogBlog: setDialogBlog
+  }
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Router>
-        <div className={`app ${theme}`}>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/blogs">Blogs</Link>
-            <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle Theme</button>
-          </nav>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blogs" element={<BlogList />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" />} />
-          </Routes>
-        </div>
-      </Router>
+      <BlogContext.Provider value={blogCTX}>
+        <Router>
+          <div className={`app ${theme}`}>
+            <header className="header" >
+              <nav className="nav-links">
+                <Link to="/" className="nav-link brand" >TheDevWays - <small style={{'font-style':'italic'}}>Blogging App</small></Link>
+                <Link to="/about" className="nav-link" >About</Link>
+                <Link to="/create-blog" className="nav-link" >Create Blog Post</Link>
+                <Link to="/create-account" className="nav-link" >Create Account</Link>
+                {/* <Link to="/contact">Contact Us</Link> */}
+              </nav>
+            <button className='theme-toggle' onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle Theme</button>
+            </header>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/create-blog" element={<CreateBlog />} />
+              <Route path="/create-account" element={<CreateAccount />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/404" />} />
+            </Routes>
+          </div>
+        </Router>
+      </BlogContext.Provider>
     </ThemeContext.Provider>
   );
 }
+
 export default App;

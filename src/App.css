@@ -1,8 +1,9 @@
 .app {
-  font-family: 'Arial, sans-serif';
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin: 0 auto;
   padding: 1rem;
-  max-width: 800px;
+  max-width: 100%;
+  max-height: fit-content;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -16,26 +17,53 @@
   color: #ffffff;
 }
 
-nav {
+/* split the nav in 2 sections. one for logo and buttons and the other for search and buttons */
+.header {
+  position: sticky;
+  top: 0;
+  
+  padding-bottom:14px;
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;;
 }
 
-nav a {
+.nav-links {
+  display: flex;
+  gap: 24px; /* Space between links */
+}
+
+.nav-link {
   text-decoration: none;
+  font-size: 16px;
   color: inherit;
+  /* transition: color 0.2s ease-in-out; */
 }
 
-nav button {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  background-color: #007bff;
-  color: #ffffff;
+.nav-link:hover {
+  color: #d1d5db; /* Tailwind's text-gray-300 */
+}
+
+.nav-link:active {
+  color: #9ca3af; /* Tailwind's text-gray-400 */
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background-color: #7b818a6e; /* Tailwind's bg-gray-700 */
+  color: rgb(0, 0, 0);
+  padding: 8px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
+.theme-toggle:hover {
+  background-color: #717e8f; /* Tailwind's bg-gray-600 */
+}
 .page {
   padding: 1rem;
   border-radius: 8px;

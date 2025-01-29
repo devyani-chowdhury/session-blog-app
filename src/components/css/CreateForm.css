@@ -1,0 +1,82 @@
+.create-blog-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  
+  .create-blog-form .form-group label {
+    margin: 0.5rem;
+  }
+
+ 
+  .create-blog-form .form-group input,
+  .create-blog-form .form-group textarea {
+    margin-bottom: 0.5rem;
+  }
+  
+  .create-blog-form .form-group.form-check {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .create-blog-form .form-group.form-check label {
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+  }
+
+  .SaveButton {
+    background-color: black; /* Tailwind's bg-gray-700 */
+    color: white;
+    padding: 8px 16px;
+    margin-right: 10px;;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .SaveButton:hover {
+    background-color: #7b818a6e; /* Tailwind's bg-gray-700 */
+    color: black;
+  }
+
+  .CancelButton {
+    background-color: #7b818a6e; /* Tailwind's bg-gray-700 */
+    color: rgb(0, 0, 0);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .CancelButton:hover {
+    background-color: black; /* Tailwind's bg-gray-700 */
+    color: white;
+  }
+
+  .create-account-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+  
+  .create-account-form .form-group {
+    display: contents;
+  }
+  
+  .create-account-form .form-group label {
+    grid-column: 1;
+    align-self: center;
+  }
+  
+  .create-account-form .form-group .form-control {
+    grid-column: 2;
+  }
+  
+  .create-account-form .btn {
+    grid-column: span 2;
+    justify-self: start;
+    margin-right: 1rem;
+  }
