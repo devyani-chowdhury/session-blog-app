@@ -11,15 +11,16 @@ function CreateBlog() {
   const [anonymous, setAnonymous] = useState(false);
 
   const handleSave = (e) => {
+    debugger;
     e.preventDefault();
-    const newBlog = { title, content, author: anonymous ? "Anonymous" : author };
-    setBlogs([...blogs, newBlog]);
+    const newBlog = { id: blogs.length + 1, title, content, author: anonymous ? "Anonymous" : author };
+    blogs.push(newBlog)
+    setBlogs([...blogs]);
     setTitle("");
     setContent("");
     setAuthor("");
     window.location.href = "/";
   };
-
 
   return (
     <div className="page">
@@ -31,7 +32,7 @@ function CreateBlog() {
         </Form.Group>
         <Form.Group controlId="formContent" className="form-group">
           <Form.Label>Content</Form.Label>
-          <Form.Control as="textarea" rows={3} value={content} onChange={(e) => setContent(e.target.value)} />
+          <Form.Control as="textarea" rows={20} value={content} onChange={(e) => setContent(e.target.value)} />
         </Form.Group>
         <Form.Group controlId="formAnonymous" className="form-group">
           <Form.Check type="checkbox" label="Post Anonymously" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} />

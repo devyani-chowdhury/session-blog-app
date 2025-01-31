@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
 import { BlogContext } from '../store/BlogContext';
+import BlogTile from './BlogTile';
+import './css/About.css';
 
 function Home() {
-  const {blogs, setDialogBlog} = useContext(BlogContext);
-
+  const {blogs} = useContext(BlogContext);
+  console.log(blogs.length);
   return (
     <div className="page">
       <h1>Welcome to Our Blog!</h1>
       <p>Discover the latest blogs and updates here.</p>
-      <div className="blog-list">
+      <div className="TileList">
         {blogs.length === 0 && <p>No blogs found.</p>}
-        { blogs.length > 0 && blogs.map((blog, index) => (
-          <div key={index} className="blog-tile" onClick={() => setDialogBlog(blog)}>
-            <h2>{blog.title}</h2>
-            <p>By {blog.author || "Anonymous"}</p>
-          </div>
+        { blogs.length > 0 && blogs.map((blog) => (
+        <BlogTile key={blog.id} blogId={blog.id} />
         ))}
       </div>
     </div>

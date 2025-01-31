@@ -1,4 +1,3 @@
-// BlogTile.jsx
 import React, { useContext, useState } from 'react';
 import { BlogContext } from '../store/BlogContext';
 import Modal from './Modal';
