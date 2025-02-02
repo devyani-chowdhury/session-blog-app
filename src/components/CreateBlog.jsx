@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react';
 import { BlogContext } from '../store/BlogContext';
 import { Form } from 'react-bootstrap';
 import './css/CreateForm.css';
+import { useNavigate } from 'react-router-dom';
 
 function CreateBlog() {
+  const navigate = useNavigate();
   const { blogs, setBlogs } = useContext(BlogContext);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -14,12 +16,12 @@ function CreateBlog() {
     debugger;
     e.preventDefault();
     const newBlog = { id: blogs.length + 1, title, content, author: anonymous ? "Anonymous" : author };
-    blogs.push(newBlog)
-    setBlogs([...blogs]);
+    const updatedBlog = [...blogs, newBlog];
+    setBlogs(updatedBlog);
     setTitle("");
     setContent("");
     setAuthor("");
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
