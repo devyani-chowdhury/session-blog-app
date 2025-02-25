@@ -23,7 +23,7 @@ function App() {
           <div className={`app ${theme}`}>
             <header className="header">
               <nav className="nav-links">
-                <Link to="/" className="nav-link brand">TheDevWays - <small style={{'font-style':'italic'}}>Blogging App</small></Link>
+                <Link to="/" className="nav-link brand">Session - <small style={{'font-style':'italic'}}>Blogging App</small></Link>
                 <Link to="/about" className="nav-link">About</Link>
                 <Link to="/create-blog" className="nav-link">Create Blog Post</Link>
                 <Link to="/create-account" className="nav-link">Create Account</Link>
