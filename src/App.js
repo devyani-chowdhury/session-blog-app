@@ -1,35 +1,35 @@
-import React, { useState, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useParams, Navigate } from 'react-router-dom';
-import Home from './components/Home';
-import BlogList from './components/BlogList';
-import BlogDetails from './components/BlogDetails';
-import NotFound from './components/NotFound';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { Provider, useSelector } from "react-redux";
+import Home from "./components/Home";
+import CreateBlog from "./components/CreateBlog";
+import CreateAccount from "./components/CreateAccount";
+import Store from "./components/Redux/StoreSlice";
+import "tailwindcss/tailwind.css";
 
-const ThemeContext = createContext();
-
-function App() {
-  const [theme, setTheme] = useState("light");
-
+const App = () => {
+  const username = useSelector((state) => state.user.username);
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Router>
-        <div className={`app ${theme}`}>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/blogs">Blogs</Link>
-            <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle Theme</button>
-          </nav>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blogs" element={<BlogList />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/404" element={<NotFound />} />
-            <Route path="*" element={<Navigate to="/404" />} />
-          </Routes>
-        </div>
-      </Router>
-    </ThemeContext.Provider>
+    <Router>
+      <div className="p-4 border-b flex justify-between">
+        <nav className="space-x-4">
+          <Link to="/" className="text-blue-500 hover:underline">Home</Link>
+          <Link to="/create-blog" className="text-blue-500 hover:underline">Create Blog</Link>
+          <Link to="/create-account" className="text-blue-500 hover:underline">Create Account</Link>
+        </nav>
+        <span className="text-gray-700">{username}</span>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create-blog" element={<CreateBlog />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+      </Routes>
+    </Router>
   );
-}
-export default App;
+};
+
+export default () => (
+  <Provider store={Store}>
+    <App />
+  </Provider>
+);
